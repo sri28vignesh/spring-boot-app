@@ -20,15 +20,17 @@ pipeline {
 
         stage('Docker Build'){
             steps{
-                sh 'docker build -t spring-boot-app .'
-                sh 'docker tag spring-boot-app spring-boot-app:$BUILD_NUMBER'
-                sh 'docker tag spring-boot-app spring-boot-app:latest'
+                sh 'docker build -t sri-training-spring-app .'
+                sh 'docker tag sri-training-spring-app:latest spring-boot-app:$BUILD_NUMBER'
+                sh 'docker tag sri-training-spring-app:latest 590852515231.dkr.ecr.us-east-1.amazonaws.com/sri-training-spring-app:latest'
             }
         }
 
         stage('Docker push to ECR'){
             steps{
-                
+                    docker.withRegistry( [ credentialsId: "aws-user", url: "https://590852515231.dkr.ecr.us-east-1.amazonaws.com" ] ){
+                        sh 'docker push 590852515231.dkr.ecr.us-east-1.amazonaws.com/sri-training-spring-app:latest'
+                    }
             }
         }
 
