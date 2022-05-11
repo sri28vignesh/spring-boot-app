@@ -28,7 +28,7 @@ pipeline {
 
         stage('Docker push to ECR'){
             steps{
-                    WithDockerRegistry( [ credentialsId: "aws-user", url: "https://590852515231.dkr.ecr.us-east-1.amazonaws.com" ] ){
+                    withDockerRegistry( [ credentialsId: "aws-user", url: "https://590852515231.dkr.ecr.us-east-1.amazonaws.com" ] ){
                         sh 'docker push 590852515231.dkr.ecr.us-east-1.amazonaws.com/sri-training-spring-app:latest'
                     }
             }
