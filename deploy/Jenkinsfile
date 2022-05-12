@@ -8,16 +8,16 @@ pipeline{
                 env.BUILD_TAG = input message: 'Please enter the Build Tag Number:',
                                     parameters: [string(defaultValue: 'latest',
                                                 description: '',
-                                                name: 'Username')]
+                                                name: 'Build Tag')]
                 }
-                sh 'echo "Username: ${env.BUILD_TAG}"'
+                sh 'echo "Username: $BUILD_TAG"'
             }
         }
         stage('Dev Deploy'){
             steps{
                 withDockerRegistry( [ credentialsId: "ecr:us-east-1:aws-user", url: "https://590852515231.dkr.ecr.us-east-1.amazonaws.com" ] ){
                         sh 'docker rm -f spring-dev-env || true'
-                        sh 'docker run -d -p 5000:8080 --name spring-dev-env 590852515231.dkr.ecr.us-east-1.amazonaws.com/sri-training-spring-app:${env.BUILD_TAG}'
+                        sh 'docker run -d -p 5000:8080 --name spring-dev-env 590852515231.dkr.ecr.us-east-1.amazonaws.com/sri-training-spring-app:$BUILD_TAG'
                         sh 'echo Application running at port 5000 for dev environment'
                     }
             }
@@ -36,7 +36,7 @@ pipeline{
             steps{
 
                 sh 'docker rm -f spring-qa-env || true'
-                sh 'docker run -d -p 5001:8080 --name spring-qa-env 590852515231.dkr.ecr.us-east-1.amazonaws.com/sri-training-spring-app:${env.BUILD_TAG}'
+                sh 'docker run -d -p 5001:8080 --name spring-qa-env 590852515231.dkr.ecr.us-east-1.amazonaws.com/sri-training-spring-app:$BUILD_TAG'
                 sh 'echo Application running at port 5001 for QA environment'
             }
         }
