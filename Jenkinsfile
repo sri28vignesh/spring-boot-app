@@ -7,7 +7,7 @@ pipeline {
 
                 sh 'git tag -a build-$BUILD_NUMBER -m "tagged from jenkings pipeline"'
 
-                sshagent(['git-ssh']) {
+                sshagent(['git-key']) {
                     sh("git push --tags")
                 }
             }
