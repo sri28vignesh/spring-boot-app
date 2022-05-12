@@ -10,7 +10,7 @@ pipeline{
                                                 description: '',
                                                 name: 'Build Tag')]
                 }
-                sh 'echo "Username: $BUILD_TAG"'
+                sh 'echo "Build Tag: $BUILD_TAG"'
             }
         }
         stage('Dev Deploy'){
