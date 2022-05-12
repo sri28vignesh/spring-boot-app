@@ -22,7 +22,7 @@ pipeline{
         }
         stage('QA Deploy'){
             steps{
-                sh 'docker run -d -p 5001:8080 sri-training-spring-app:latest'
+                sh 'docker run -d -p 5001:8080 590852515231.dkr.ecr.us-east-1.amazonaws.com/sri-training-spring-app:latest'
                 sh 'echo Application running at port 5001 for QA environment'
             }
         }
