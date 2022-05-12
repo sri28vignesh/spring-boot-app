@@ -5,7 +5,7 @@ pipeline {
         stage('Git Tag'){
             steps{
 
-                sh 'git tag -a build-$BUILD_NUMBER'
+                sh 'git tag -a build-$BUILD_NUMBER -m "tagged from jenkings pipeline"'
 
                 sshagent(['git-ssh']) {
                     sh("git push --tags")
