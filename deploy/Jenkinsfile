@@ -16,6 +16,9 @@ pipeline{
                 message  "Approve deployment to QA"
                 ok "Allow"
             }
+            steps{
+                sh 'Approved Deployment to QA environment'
+            }
         }
         stage('QA Deploy'){
             steps{
