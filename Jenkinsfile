@@ -2,7 +2,7 @@ pipeline {
     agent any
 
     stages {
-        stage('Git Tag'{
+        stage('Git Tag'){
             steps{
 
                 sh 'git tag -a build-$BUILD_NUMBER'
@@ -11,7 +11,7 @@ pipeline {
                     sh("git push --tags")
                 }
             }
-        })
+        }
         stage('Maven Build') {
             agent {
                 docker {
