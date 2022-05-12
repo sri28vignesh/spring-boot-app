@@ -14,7 +14,7 @@ pipeline{
         stage('Approval'){
              input{
                 message  "Approve deployment to QA"
-                Ok "Allow"
+                ok "Allow"
             }
         }
         stage('QA Deploy'){
